@@ -1,0 +1,6 @@
+.pyc
+.DB_Store
+__pycache__/
+db.splite3
+*.key
+thumbs.db
