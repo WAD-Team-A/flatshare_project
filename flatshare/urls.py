@@ -1,7 +1,7 @@
 from django.urls import path
 from flatshare import views
 
-app = 'flatshare'
+app_name = 'flatshare'
 
 urlpatterns = [
     path('', views.index, name='index'),

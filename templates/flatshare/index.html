@@ -2,10 +2,19 @@
 {% load staticfiles %} 
 
 {% block title_block %}
-    homepage
+    Home
 {% endblock %}
 
 {% block body_block %}
-    <h1>Home page </h1>
-    <a href = 'flatshare/about'> About</a>
+<div>
+	<h1>Flatshare</h1>
+	<a href="flatshare/login">Login</a><br />
+	<a href="flatshare/about">About</a><br />
+</div>
+
+<div>
+	<h1>Apartment 1</h1>
+	<h5> yes i know this is ugly and wrong, im just testing the static images thingy</h5>
+	<img src="{% static 'images/apartment1.jpg' %}" alt="Picture of Apartment 1" />
+</div>
 {% endblock %}
