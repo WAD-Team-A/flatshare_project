@@ -29,7 +29,6 @@ class Profile_addFlat(models.Model):
 
 class Flat(models.Model):
     NAME_MAX_CHAR = 128
-    flat_id = models.IntegerField(default = 1, primary_key=True)
     rent = models.IntegerField(default = 1)
     def __str__(self):
         return self.flat_id
@@ -44,7 +43,7 @@ class Address(models.Model):
     city = models.CharField(max_length = 128, unique = False)
 
 class Flat_images(models.Model):
-    iamge_flat = models.OneToOneField(Flat, on_delete = models.CASCADE)
+    iamge_flat = models.ForeignKey(Flat, on_delete = models.CASCADE)
     image = models.ImageField(upload_to='flat_images', blank=True)
 
 
