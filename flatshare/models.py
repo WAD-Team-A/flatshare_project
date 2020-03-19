@@ -30,6 +30,8 @@ class Profile_addFlat(models.Model):
 class Flat(models.Model):
     NAME_MAX_CHAR = 128
     rent = models.IntegerField(default = 1)
+    addflat_user = models.OneToOneField(User_addFlat, on_delete = models.CASCADE)
+
     def __str__(self):
         return self.flat_id
 
