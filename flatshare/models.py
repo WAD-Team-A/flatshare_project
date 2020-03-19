@@ -31,6 +31,9 @@ class Address(models.Model):
         return self.flat_no + ' ' + self.house_no + ' ' + self.street + ' ' + self.city + ' ' + self.province + ' ' \
                + self.postcode + ' ' + self.country
 
+class Flat_images(models.Model):
+    iamge_flat = models.OneToOneField(Flat, on_delete = models.CASCADE)
+    image = models.ImageField(upload_to='flat_images', blank=True)
 
 class Flat(models.Model):
     name = models.CharField(max_length=30)
