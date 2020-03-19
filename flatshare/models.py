@@ -31,10 +31,6 @@ class Address(models.Model):
         return self.flat_no + ' ' + self.house_no + ' ' + self.street + ' ' + self.city + ' ' + self.province + ' ' \
                + self.postcode + ' ' + self.country
 
-class FlatImages(models.Model):
-    iamge_flat = models.OneToOneField(Flat, on_delete = models.CASCADE)
-    image = models.ImageField(upload_to='flat_images', blank=True)
-
 class Flat(models.Model):
     name = models.CharField(max_length=30)
     flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
@@ -43,6 +39,8 @@ class Flat(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
+    image = models.ImageField(upload_to=str(flat_id)+'_images', blank=True) #will be replaced by a gallery soon
+
    #likers = models.ManyToManyField(User)
 
     def __str__(self):
