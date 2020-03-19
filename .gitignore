@@ -6,4 +6,3 @@ __pycache__/
 thumbs.db
 *.jpg
 .idea/
-flatshare/migrations/

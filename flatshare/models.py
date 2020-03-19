@@ -27,10 +27,6 @@ class Address(models.Model):
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=60)
 
-    def __str__(self):
-        return self.flat_no + ' ' + self.house_no + ' ' + self.street + ' ' + self.city + ' ' + self.province + ' ' \
-               + self.postcode + ' ' + self.country
-
 class Flat(models.Model):
     name = models.CharField(max_length=30)
     flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
