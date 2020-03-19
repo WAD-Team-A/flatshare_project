@@ -1,7 +1,9 @@
 .pyc
 .DB_Store
 __pycache__/
-db.splite3
+*.sqlite3
 *.key
 thumbs.db
 *.jpg
+.idea/
+flatshare/migrations/
