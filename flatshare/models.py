@@ -17,23 +17,8 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.FirstName + " " + self.LastName
 
-class Flat(models.Model):
-    NAME_MAX_CHAR = 128
-    name = models.CharField(max_length=NAME_MAX_CHAR)
-    flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
-    rent = models.IntegerField(default=1)
-    #owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=500)
-    available_from = models.DateField(default=now)
-    image = models.ImageField(upload_to=str(flat_id)+'_images', blank=True) #will be replaced by a gallery soon
-
-   #likers = models.ManyToManyField(User)
-
-    def __str__(self):
-        return self.name
-        
 class Address(models.Model):
-    flat = models.OneToOneField(Flat, on_delete = models.CASCADE)
+    address_id=models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     flat_no = models.CharField(max_length=5)
     house_no = models.IntegerField(default= 1)
     street = models.CharField(max_length=100)
@@ -42,22 +27,21 @@ class Address(models.Model):
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=60)
 
-<<<<<<< HEAD
+    def __str__(self):
+       return self.flat_no + ' ' + str(self.house_no) + ' ' + self.street + ' ' + self.city + ' ' + self.province
+
 class Flat(models.Model):
-    name = models.CharField(max_length=30)
-    flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
-    address = Address
+    NAME_MAX_CHAR = 128
+    name = models.CharField(max_length=NAME_MAX_CHAR)
+    flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    address = models.OneToOneField(Address, on_delete = models.CASCADE, null=True)
     rent = models.IntegerField(default=1)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    #owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
     image = models.ImageField(upload_to=str(flat_id)+'_images', blank=True) #will be replaced by a gallery soon
 
    #likers = models.ManyToManyField(User)
-=======
+
     def __str__(self):
-        return self.street + ' ' + self.city + ' ' + self.province + ' ' \
-               + self.postcode + ' ' + self.country
-
->>>>>>> 806dcbe4c240dd8240b34cb3bc5088929ed49ce7
-
+        return self.name + ' ' + str(self.address) + ' ' + str(self.rent) + ' ' + self.description + ' ' + str(self.available_from)
