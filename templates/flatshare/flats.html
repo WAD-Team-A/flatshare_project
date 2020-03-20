@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Available</title>
+	</head>
+
+	<body>
+		<h1>Available Flats</h1>
+		<div>
+		{% if flats %}
+			<ul>
+			{% for flat in flats %}
+				<li>{{ flat }}</li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<strong>There are no flats present.</strong>
+		{% endif %}
+		</div>
+		
+		<div>
+			<a href="/">Back to Home</a><br />
+		</div>
+	</body>
+</html>

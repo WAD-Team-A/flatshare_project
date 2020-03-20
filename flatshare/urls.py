@@ -4,7 +4,8 @@ from flatshare import views
 app_name = 'flatshare'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    #path('', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('login/', views.login, name='login'),
+    path('flats/', views.flats, name='flats'),
 ]

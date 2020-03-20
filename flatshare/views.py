@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
 from django.http import HttpResponse
+from flatshare.models import Flat
 
 def index(request):
     return render(request, 'flatshare/index.html')
@@ -19,3 +19,12 @@ def addflat(request):
 
 def findflat(request):
     return HttpResponse("place holder findflat page")
+
+def flats(request):
+    context_dict = {}
+
+    SELECTED_ORDER = 'rent'
+    flat_list = Flat.objects.order_by(SELECTED_ORDER)
+    context_dict['flats'] = flat_list
+
+    return render(request, 'flatshare/flats.html', context=context_dict)
