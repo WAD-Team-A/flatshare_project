@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <title>
             Flatshare -
             {% block title_block %}
@@ -9,10 +10,8 @@
             {% endblock %}            
         </title>
         <body>
-            <div>
-                {% block body_block %}
-                {% endblock %}
-            </div>
+            {% block body_block %}
+            {% endblock %}
         </body>
     </head>
 </html>
