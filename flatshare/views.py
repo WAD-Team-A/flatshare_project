@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from flatshare.models import Flat, UserProfile
+from flatshare.forms import AddFlatForm, AddAddressForm
 
 
 def index(request):
@@ -30,7 +32,22 @@ def view_profile(request, user_slug):
 
 
 def add_flat(request):
-    return HttpResponse("place holder addflat page")
+    form = AddFlatForm()
+
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = AddFlatForm(request.POST)
+
+    # Have we been provided with a valid form?
+    if form.is_valid():
+        # Save the new category to the database.
+        form.save(commit=True)
+        # Now that the category is saved, we could confirm this.
+        # For now, just redirect the user back to the index view.
+        return redirect('/')
+    else:
+        print(form.errors)
+    return render(request, 'flatshare/add_flat.html', {'form': form})
 
 
 def show_flat(request, flat_slug):

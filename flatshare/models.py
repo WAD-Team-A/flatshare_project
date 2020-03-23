@@ -11,7 +11,7 @@ class Address(models.Model):
     address_id = models.UUIDField(primary_key=True, editable=False, default=generated_uuid)
     flat_no = models.CharField(max_length=5)
     house_no = models.IntegerField(default=1)
-    street = models.CharField(max_length=100)
+    street = models.CharField(max_length=99)
     city = models.CharField(max_length=100)
     province = models.CharField(max_length=100)
     postcode = models.CharField(max_length=10)
