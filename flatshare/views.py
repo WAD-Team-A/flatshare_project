@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from flatshare.models import Flat
+from flatshare.models import Flat, UserProfile
 
 
 def index(request):
@@ -17,6 +17,16 @@ def login(request):
 
 def signup(request):
     return HttpResponse("place holder signup page")
+
+
+def view_profile(request, user_slug):
+    context_dict = {}
+    try:
+        user_profile = UserProfile.objects.get(slug=user_slug)
+        context_dict['user_profile'] = user_profile
+    except UserProfile.DoesNotExist:
+        context_dict['user_profile'] = None
+    return render(request, 'flatshare/user.html', context=context_dict)
 
 
 def add_flat(request):

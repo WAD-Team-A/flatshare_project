@@ -1,0 +1,27 @@
+{% extends 'flatshare/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    User Profile
+{% endblock %}
+
+{% block body_block %}
+<div>
+{% if user_profile %}
+    <ul>
+        <li>{{ user_profile.FirstName}} {{ user_profile.LastName }}</li>
+        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}">
+        <li>{{ user_profile.age }}</li>
+        {% if user_profile.liked_flats %}
+            <li>
+            {% for flat in user_profile.liked_flats.all %}
+                {{ flat.name }}
+            {% endfor %}
+            </li>
+        {% endif %}
+    </ul>
+{% else %}
+    <strong>There are no flats present.</strong>
+{% endif %}
+</div>
+{% endblock %}

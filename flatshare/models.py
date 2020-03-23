@@ -24,15 +24,6 @@ class Address(models.Model):
         return self.flat_no + ' ' + str(self.house_no) + ' ' + self.street + ' ' + self.city + ' ' + self.province
 
 
-class FlatImageGallery(models.Model):
-    def __init__(self, flat_id, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        save_location: str = 'flat_{0}_images/'.format(flat_id)
-        self.gallery = []
-        for i in range(5):
-            self.gallery.append(models.ImageField(upload_to=save_location, blank=True, null=True))
-
-
 class Flat(models.Model):
     NAME_MAX_CHAR = 128
     name = models.CharField(max_length=NAME_MAX_CHAR)
@@ -43,8 +34,10 @@ class Flat(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
-    images = models.OneToOneField(FlatImageGallery(flat_id), on_delete=models.SET_NULL, null=True, blank=True)
-    slug = models.SlugField()
+    save_location: str = '{0}_images/'.format(generated)
+    image1 = models.ImageField(upload_to=save_location, blank=True, null=True)
+    image2 = models.ImageField(upload_to=save_location, blank=True, null=True)
+    slug = models.SlugField(blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.generated)
@@ -59,11 +52,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     FirstName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
     LastName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='{0}/profile_images'.format(id(user)), blank=True)
     phone_no = models.IntegerField(default=888, unique=True)
     age = models.IntegerField(default=18)
     liked_flats = models.ManyToManyField(Flat, related_name="likers", blank=True)
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True)
 
     # owned_flats: get via flats model
 

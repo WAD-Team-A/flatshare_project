@@ -15,9 +15,8 @@
         <li>{{ flat.owner }}</li>
         <li>{{ flat.description }}</li>
         <li>{{ flat.available_from }}</li>
-        {% for image in flat.images %}
-            <img src="{{ image.url }}">
-        {% endfor %}
+        <img src="{{ MEDIA_URL }}{{ flat.image1 }}">
+        <img src="{{ MEDIA_URL }}{{ flat.image2 }}">
     </ul>
 {% else %}
     <strong>There are no flats present.</strong>
