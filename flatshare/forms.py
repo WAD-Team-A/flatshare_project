@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.timezone import now
-from flatshare.models import Flat, Address
-
+from flatshare.models import Flat, Address, UserProfile
+from django.contrib.auth.models import User
 
 class AddAddressForm(forms.ModelForm):
     help_text=("Please enter an address for your flat")
@@ -50,3 +50,14 @@ class AddFlatForm(forms.ModelForm):
 exclude = ('category',)
 # or specify the fields to include (don't include the category field).
 #fields = ('title', 'url', 'views')
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta: 
+        model = User
+        fields = ('username', 'email', 'password',)
+        
+class UserProfileForm(forms.ModelForm): 
+    class Meta:
+        model = UserProfile
+        fields = ('FirstName', 'LastName', 'picture', 'phone_no', 'age')

@@ -8,9 +8,13 @@
 {% block body_block %}
 <div>
 	<h1>Flatshare</h1>
-	<a href="flatshare/login">Login</a><br />
-	<a href="flatshare/flats">Available Flats</a><br />
-    <a href="flatshare/add_flat/">Add a New Flat</a><br />
-	<a href="flatshare/about">About</a><br />
+	<ul class = "nav" style="list-style-type: none;">
+		<li><a href="{% url 'flatshare:login' %}">Login</a></li>
+		<li><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
+		<li><a href="flatshare/flats">Available Flats</a><br /></li>
+		<li><a href="flatshare/add_flat/">Add a New Flat</a></li>
+		<li><a href="{% url 'flatshare:about' %}">About</a></li>
+
+	</ul>
 </div>
 {% endblock %}

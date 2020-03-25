@@ -53,7 +53,7 @@ class UserProfile(models.Model):
     FirstName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
     LastName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
     picture = models.ImageField(upload_to='{0}/profile_images'.format(id(user)), blank=True)
-    phone_no = models.IntegerField(default=888, unique=True)
+    phone_no = models.IntegerField(unique=True, blank =True)
     age = models.IntegerField(default=18)
     liked_flats = models.ManyToManyField(Flat, related_name="likers", blank=True)
     slug = models.SlugField(blank=True)
