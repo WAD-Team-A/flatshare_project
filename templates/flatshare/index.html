@@ -1,20 +1,104 @@
-{% extends 'flatshare/base.html' %}
-{% load staticfiles %} 
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<title>flatshare - home</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Satisfy|Trade+Winds&display=swap" rel="stylesheet">
 
-{% block title_block %}
-    Home
-{% endblock %}
+	</head>
+	<body>
+		<div class ="header">
+			<div class ="logo">
+				<h1>FLAT SHARE</h1>
+			</div>
+			<div class ="auth">
+				<ul>
+					<li><a href="{% url 'flatshare:login' %}">Log in</a></li>
+					<li><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
 
-{% block body_block %}
-<div>
-	<h1>Flatshare</h1>
-	<ul class = "nav" style="list-style-type: none;">
-		<li><a href="{% url 'flatshare:login' %}">Login</a></li>
-		<li><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
-		<li><a href="flatshare/flats">Available Flats</a><br /></li>
-		<li><a href="flatshare/add_flat/">Add a New Flat</a></li>
-		<li><a href="{% url 'flatshare:about' %}">About</a></li>
+				</ul>
+				
+			</div>
+			
+			<div class ="nav_bar">
+				<ul>
+					<li class="active"><a href="{%url 'flatshare:index' %}">Home</a></li>
+					<li><a href="flatshare/flats">Available Flats</a></li>
+					<li><a href="flatshare/add_flat/">Add a New Flat</a></li>
+					<li><a href="#about_us">About Us</a></li>
+					<li><a href="">Contact Us</a></li>
+				</ul>
+				
+			
+				</ul>
+			</div>
+		</div>
+		<div class="homeImage">
+			<img src="{% static 'images/room2.jpg' %}" alt="picture of room" />
+		</div>
+		
+		<div class ="content1">
+			<h1> Share A Flat</h1>
+		</div>
+		<div class ="content2">
+			<h2 name= "about_us">Our Services</h2>
+			<div class='par-1'>
+				<h3>Service 1</h3>
+				<p>
+					Lorem ipsum dolor sit amet, <br />
+					consectetur adipiscing elit, sed do eiusmod<br />
+					tempor incididunt ut labore et dolore magna aliqua.<br />
+					ad minim veniam, quis nostrud exercitation ullamco  <br />
+					aliquip ex ea commodo consequat. Duis aute <br />
+					irure dolor in reprehenderit in velit <br />
+					esse cillum dolore eu fugiat nulla<br />
+					pariatur. Excepteur sint occaecat <br />
+					cupidatat non proident, sunt <br />
+					in culpa qui officia <a href="">Link</a>.
+				</p>
+			</div>
+			<div class='par-2'>
+				<h3>Service 2</h3>
+				<p>
+					Lorem ipsum dolor sit amet, <br />
+					consectetur adipiscing elit, sed do eiusmod<br />
+					tempor incididunt ut labore et dolore magna aliqua.<br />
+					ad minim veniam, quis nostrud exercitation ullamco  <br />
+					aliquip ex ea commodo consequat. Duis aute <br />
+					irure dolor in reprehenderit in velit <br />
+					esse cillum dolore eu fugiat nulla<br />
+					pariatur. Excepteur sint occaecat <br />
+					cupidatat non proident, sunt <br />
+					in culpa qui officia <a href="">Link</a>.
+				</p>
+			</div>
+			<div class='par-3'>
+				<h3>Service 3</h3>
+				<p>
+					Lorem ipsum dolor sit amet, <br />
+					consectetur adipiscing elit, sed do eiusmod<br />
+					tempor incididunt ut labore et dolore magna aliqua.<br />
+					ad minim veniam, quis nostrud exercitation ullamco  <br />
+					aliquip ex ea commodo consequat. Duis aute <br />
+					irure dolor in reprehenderit in velit <br />
+					esse cillum dolore eu fugiat nulla<br />
+					pariatur. Excepteur sint occaecat <br />
+					cupidatat non proident, sunt <br />
+					in culpa qui officia <a href="">Link</a>.
+				</p>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li><a href="{%url 'flatshare:index' %}">Terms Of Use</a></li>
+				<li><a href="flatshare/flats">Privacy Policy</a></li>
+				<li class ="right"><a href="#about_us">About Us</a></li>
+				<li class="right"><a href="">Contact Us</a></li>
+			</ul>
+		</div>
+		
 
-	</ul>
-</div>
-{% endblock %}
+	</body>
+</html>
+

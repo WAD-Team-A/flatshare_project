@@ -12,9 +12,6 @@ def index(request):
     return render(request, 'flatshare/index.html')
 
 
-def about(request):
-    return render(request, 'flatshare/about.html')
-
 
 def login(request):
     if request.method == 'POST':
