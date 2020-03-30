@@ -10,10 +10,20 @@
 <div>
     <form id="add_flat_form" method="post" action="/flatshare/add_flat/">
         {% csrf_token %}
+        {% for hidden in address_form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
         {% for hidden in form.hidden_fields %}
             {{ hidden }}
         {% endfor %}
+        {% for field in address_form.visible_fields %}
+            {{ field.name }}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %}
         {% for field in form.visible_fields %}
+            {{ field.name }}
             {{ field.errors }}
             {{ field.help_text }}
             {{ field }}

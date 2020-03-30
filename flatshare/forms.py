@@ -18,20 +18,19 @@ class AddAddressForm(forms.ModelForm):
         fields = ('flat_no','house_no', 'street', 'city', 'province', 'postcode', 'country')
 
 
-class AddFlatForm(forms.ModelForm):
+class AddFlatForm(forms.ModelForm,):
     help_text = ("Please enter flat details.")
     name = forms.CharField()
-    address = AddAddressForm
     rent = forms.IntegerField(initial=0)
     description = forms.TextInput()
-    image1 = forms.ImageField()
-    image2 = forms.ImageField()
+    image1 = forms.ImageField(required=False)
+    image2 = forms.ImageField(required=False)
     available_from = forms.DateField(initial=now())
     #likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     class Meta:
         model = Flat
-        fields = ('name','address', 'rent', 'description', 'image1', 'image2', 'available_from')
+        fields = ('name', 'rent', 'description', 'image1', 'image2', 'available_from')
 
 
 # class PageForm(forms.ModelForm):

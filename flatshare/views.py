@@ -1,8 +1,9 @@
+from django.forms import modelformset_factory
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from flatshare.models import Flat, UserProfile
-from flatshare.forms import AddFlatForm, AddAddressForm, UserProfileForm, UserForm
+from flatshare.models import Flat, UserProfile, Address
+from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import reverse
 
@@ -71,22 +72,26 @@ def view_profile(request, user_slug):
 
 
 def add_flat(request):
+    address_form = AddAddressForm()
     form = AddFlatForm()
 
-    # A HTTP POST?
     if request.method == 'POST':
+        address_form = AddAddressForm(request.POST)
         form = AddFlatForm(request.POST)
 
-    # Have we been provided with a valid form?
-    if form.is_valid():
-        # Save the new category to the database.
-        form.save(commit=True)
-        # Now that the category is saved, we could confirm this.
-        # For now, just redirect the user back to the index view.
-        return redirect('/')
-    else:
-        print(form.errors)
-    return render(request, 'flatshare/add_flat.html', {'form': form})
+        if all((address_form.is_valid(), form.is_valid())):
+            address = address_form.save(commit=True)
+            print(address)
+            flat = form.save(commit=False)
+            print(flat)
+            flat.address = address
+            flat.save()
+            return redirect('/')
+        else:
+            print('YIKES')
+            print(address_form.errors)
+            print(form.errors)
+    return render(request, 'flatshare/add_flat.html', {'address_form': address_form, 'form': form,})
 
 
 def show_flat(request, flat_slug):
