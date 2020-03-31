@@ -12,4 +12,6 @@ urlpatterns = [
     path('flats/<slug:flat_slug>/', views.show_flat, name='show_flat'),
     path('users/<slug:user_slug>', views.view_profile, name='view_profile'),
     path('add_flat/', views.add_flat, name='add_flat'),
+    path('about/', views.about, name = 'about'),
+    path('contact/', views.contact, name = 'contact'),
 ]

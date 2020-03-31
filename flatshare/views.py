@@ -16,6 +16,21 @@ def index(request):
         context_dict['user'] = user
     return render(request, 'flatshare/index.html', context=context_dict)
 
+def about(request):
+    context_dict = {}
+    if request.user.is_authenticated:
+        context_dict["user_authenticated"] = True
+        user = UserProfile.objects.get(user=request.user)
+        context_dict['user'] = user
+    return render(request, 'flatshare/about.html', context=context_dict)
+
+def contact(request):
+    context_dict = {}
+    if request.user.is_authenticated:
+        context_dict["user_authenticated"] = True
+        user = UserProfile.objects.get(user=request.user)
+        context_dict['user'] = user
+    return render(request, 'flatshare/contact.html', context=context_dict)
 
 def user_login(request):
     if request.method == 'POST':
