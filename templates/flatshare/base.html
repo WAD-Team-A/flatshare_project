@@ -33,8 +33,10 @@
                 </ul>
             </div>
         </div>
-        {% block body_block %}
-        {% endblock %}
+        <div class = "container">
+            {% block body_block %}
+            {% endblock %}
+        </div>
         <div class="footer">
             <ul>
                 <li><a href="{% url 'flatshare:index' %}">Terms Of Use</a></li>
