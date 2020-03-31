@@ -1,38 +1,46 @@
-from django.forms import modelformset_factory
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from flatshare.models import Flat, UserProfile, Address
+from flatshare.models import Flat, UserProfile
 from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
 
 
-
 def index(request):
-    return render(request, 'flatshare/index.html')
+    context_dict = {}
+    if request.user.is_authenticated:
+        context_dict["user_authenticated"] = True
+        user = UserProfile.objects.get(user=request.user)
+        context_dict['user'] = user
+    return render(request, 'flatshare/index.html', context=context_dict)
 
 
-
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        print(password)
         user = authenticate(username=username, password=password)
 
-        if user :
+        if user:
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('flatshare:index'))
             else:
                 return HttpResponse('Your flatshare account is disabled')
         else:
-            print(f"invalid login details: {username}, {password}")
-            return HttpResponse("invalid login details uspplied")
+            print(f"invalid login details: {username}, {password}".format(username=username, password=password))
+            return HttpResponse("invalid login details supplied")
     else:
         return render(request, 'flatshare/login.html')
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('flatshare:index'))
 
 def signup(request):
     registered = False
@@ -57,8 +65,8 @@ def signup(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    return render(request, 'flatshare/signup.html',context = {'user_form': user_form,'profile_form': profile_form,'registered': registered})
-
+    return render(request, 'flatshare/signup.html',
+                  context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
 def view_profile(request, user_slug):
@@ -72,26 +80,30 @@ def view_profile(request, user_slug):
 
 
 def add_flat(request):
-    address_form = AddAddressForm()
-    form = AddFlatForm()
+    if request.user.is_authenticated:
+        address_form = AddAddressForm()
+        form = AddFlatForm()
 
-    if request.method == 'POST':
-        address_form = AddAddressForm(request.POST)
-        form = AddFlatForm(request.POST)
+        if request.method == 'POST':
+            address_form = AddAddressForm(request.POST)
+            form = AddFlatForm(request.POST)
 
-        if all((address_form.is_valid(), form.is_valid())):
-            address = address_form.save(commit=True)
-            print(address)
-            flat = form.save(commit=False)
-            print(flat)
-            flat.address = address
-            flat.save()
-            return redirect('/')
-        else:
-            print('YIKES')
-            print(address_form.errors)
-            print(form.errors)
-    return render(request, 'flatshare/add_flat.html', {'address_form': address_form, 'form': form,})
+            if all((address_form.is_valid(), form.is_valid())):
+                address = address_form.save(commit=True)
+                print(address)
+                flat = form.save(commit=False)
+                print(flat)
+                flat.address = address
+                flat.owner = request.user
+                flat.save()
+                return redirect('/')
+            else:
+                print('YIKES')
+                print(address_form.errors)
+                print(form.errors)
+        return render(request, 'flatshare/add_flat.html', {'address_form': address_form, 'form': form, })
+    else:
+        return HttpResponse("please log in first!")
 
 
 def show_flat(request, flat_slug):
