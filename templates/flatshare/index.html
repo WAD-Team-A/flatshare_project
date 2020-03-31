@@ -9,32 +9,22 @@
 </head>
 <body>
 <div class="header">
-    <div class="logo">
-        <h1>FLAT SHARE</h1>
-    </div>
-    <div class="auth">
-        <ul>
-            {% if user_authenticated %}
-                <li><a href="flatshare/users/{{ user.slug }}">My Profile</a></li>
-                <li><a href="{% url 'flatshare:logout' %}">Log out</a></li>
-            {% else %}
-                <li><a href="{% url 'flatshare:login' %}">Log in</a></li>
-                <li><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
-            {% endif %}
-        </ul>
-
-    </div>
-
     <div class="nav_bar">
         <ul>
+        	<li style = "padding-bottom:0"><h1 class = "logo">FLAT SHARE</h1></li>
             <li class="active"><a href="{% url 'flatshare:index' %}">Home</a></li>
             <li><a href="{% url 'flatshare:list_flats' %}">Available Flats</a></li>
             <li><a href="flatshare/add_flat/">Add a New Flat</a></li>
             <li><a href="#about_us">About Us</a></li>
             <li><a href="">Contact Us</a></li>
-        </ul>
-
-
+			
+            {% if user_authenticated %}
+                <li style = "float:right"><a href="flatshare/users/{{ user.slug }}">My Profile</a></li>
+                <li style = "float:right"><a href="{% url 'flatshare:logout' %}">Log out</a></li>
+            {% else %}
+                <li style = "float:right"><a href="{% url 'flatshare:login' %}">Log in</a></li>
+                <li style = "float:right"><a href="{% url 'flatshare:signup' %}">Sign up</a></li>
+            {% endif %}  
         </ul>
     </div>
 </div>

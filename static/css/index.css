@@ -33,13 +33,14 @@ body{
     text-decoration: none;
 }
 
-.logo{ 
+/* .logo{ 
     background-color:rgb(2, 82, 74);
     width: fit-content;
-}
-.logo h1{
+} */
+.logo{
     display: block;
     padding:10px;
+    padding-top:0;
     padding-bottom:0;
     font-size: 100%;
     margin: 0;
@@ -50,7 +51,9 @@ body{
     padding: 0;
     margin: 0;
     width:100%;
+    display: inline-block;
 }
+
 .nav_bar ul{
     position: relative;
     list-style-type: none;
@@ -60,23 +63,23 @@ body{
     background-color: rgb(2, 82, 74);
     
 }
+
 .nav_bar li {
     
     padding: 10px;
     float: left;
-}
-.nav_bar li.right{
-    float:right;
 
 }
+
 .nav_bar li a{
     font-family: Arial, Helvetica, sans-serif;
-    padding: 25px;
+    padding: 10px;
     margin: 0;
     position: relative;
     color: white;
     text-decoration: none;
 }
+
 .homeImage img{
     margin-bottom: 0px;
     opacity: 0.7;
