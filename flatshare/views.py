@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from flatshare.models import Flat, UserProfile
-from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
+from flatshare.forms import AddFlatForm, UserProfileForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
 

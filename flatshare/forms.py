@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.timezone import now
-from flatshare.models import Flat, Address, UserProfile
+from flatshare.models import Flat, UserProfile
 from django.contrib.auth.models import User
-
+'''
 class AddAddressForm(forms.ModelForm):
     help_text=("Please enter an address for your flat")
     flat_no = forms.CharField()
@@ -16,7 +16,7 @@ class AddAddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ('flat_no','house_no', 'street', 'city', 'province', 'postcode', 'country')
-
+'''
 
 class AddFlatForm(forms.ModelForm,):
     help_text = ("Please enter flat details.")
