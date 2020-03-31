@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    User Profile
+    {{ user_profile.user }}'s Profile
 {% endblock %}
 
 {% block body_block %}
@@ -20,6 +20,13 @@
                     </li>
                 {% else %}
                     <strong>There are no flats present.</strong>
+                {% endif %}
+                {% if owned_flats %}
+                    <li>
+                        {% for flat in user_profile.liked_flats.all %}
+                            {{ flat.name }}
+                        {% endfor %}
+                    </li>
                 {% endif %}
             </ul>
         {% else %}

@@ -56,6 +56,7 @@ class UserProfile(models.Model):
     phone_no = models.IntegerField(unique=True, blank=True)
     age = models.IntegerField(default=18)
     liked_flats = models.ManyToManyField(Flat, related_name="likers", blank=True)
+    liked_users = models.ManyToManyField(User, related_name="liked_by_set", blank=True)
     slug = models.SlugField(blank=True)
 
     # owned_flats: get via flats model

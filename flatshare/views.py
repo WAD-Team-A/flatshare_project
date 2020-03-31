@@ -11,6 +11,7 @@ from django.shortcuts import reverse
 def index(request):
     return render(request, 'flatshare/index.html')
 
+
 def about(request):
     context_dict = {}
     if request.user.is_authenticated:
@@ -19,6 +20,7 @@ def about(request):
         context_dict['user'] = user
     return render(request, 'flatshare/about.html', context=context_dict)
 
+
 def contact(request):
     context_dict = {}
     if request.user.is_authenticated:
@@ -26,6 +28,7 @@ def contact(request):
         user = UserProfile.objects.get(user=request.user)
         context_dict['user'] = user
     return render(request, 'flatshare/contact.html', context=context_dict)
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -47,10 +50,12 @@ def user_login(request):
     else:
         return render(request, 'flatshare/login.html')
 
+
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('flatshare:index'))
+
 
 def signup(request):
     registered = False
@@ -84,9 +89,20 @@ def view_profile(request, user_slug):
     try:
         user_profile = UserProfile.objects.get(slug=user_slug)
         context_dict['user_profile'] = user_profile
+        context_dict['owned_flats'] = user_profile.user.flat_set
     except UserProfile.DoesNotExist:
         context_dict['user_profile'] = None
     return render(request, 'flatshare/user.html', context=context_dict)
+
+
+@login_required
+def my_matches(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    flat_matches = []
+    for flat in user_profile.liked_flats:
+        if flat.owner in user_profile.user.liked_by_set:  # TODO: complete comparison
+            flat_matches.append(flat)
+    return render(request, 'flatshare/matches.html', {'flat_matches': flat_matches})
 
 
 def add_flat(request):
