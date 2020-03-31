@@ -6,13 +6,15 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to Flatshare</h1>
-<form id ="login_form" method = "post" action = "{% url 'flatshare:login' %}">
-    {% csrf_token %}
-    Username:<input type= "text" name="username" value = "" size = "50">
-    <br />
-    Password:<input type= "text" name="password" value = "" size = "50">
-    <br />
-    <input type="submit", value="submit">
-</form>
+<div class = "login-form">
+    <h2>Login to Flatshare</h2>
+    <form id ="login_form" method = "post" action = "{% url 'flatshare:login' %}">
+        {% csrf_token %}
+        <input type= "text" name="username" placeholder = "Enter Username" size = "50">
+        <br />
+        <input type= "text" name="password" placeholder = "Enter Password" size = "50">
+        <br />
+        <button type="submit">Login</button>
+    </form>
+</div>
 {% endblock %}
