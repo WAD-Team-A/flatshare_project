@@ -9,12 +9,7 @@ from django.shortcuts import reverse
 
 
 def index(request):
-    context_dict = {}
-    if request.user.is_authenticated:
-        context_dict["user_authenticated"] = True
-        user = UserProfile.objects.get(user=request.user)
-        context_dict['user'] = user
-    return render(request, 'flatshare/index.html', context=context_dict)
+    return render(request, 'flatshare/index.html')
 
 def about(request):
     context_dict = {}
@@ -133,7 +128,6 @@ def show_flat(request, flat_slug):
 
 def list_flats(request):
     context_dict = {}
-
     SELECTED_ORDER = 'rent'
     flat_list = Flat.objects.order_by(SELECTED_ORDER)
     context_dict['flats'] = flat_list
