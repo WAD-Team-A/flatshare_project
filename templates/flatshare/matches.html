@@ -2,19 +2,31 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    {{ user_profile.user }}'s Matches
+    {{ user }}'s Matches
 {% endblock %}
 
 {% block body_block %}
     <div>
-        {% if flat_matches %}
+        <h3>Your Matches</h3>
+        {% if matches %}
             <li>
-                {% for flat in flat_matches %}
-                    {{ flat.name }}
+                {% for match in matches %}
+                    {{ match }}
                 {% endfor %}
             </li>
         {% else %}
             <strong>No flat matches available</strong>
+        {% endif %}
+        <h3>Users who have liked your flat:</h3>
+        {% if likers %}
+            {% for liker in likers%}
+                <a href="{% url 'flatshare:view_profile' user_slug=liker.slug%}">{{ liker.user }}</a>
+                <form action='{{ liker.slug }}/like' method='GET'>
+                    <button type='submit'> Like User </button>
+                </form>
+            {% endfor %}
+        {% else %}
+            <strong>No one has liked your flat yet.</strong>
         {% endif %}
     </div>
 {% endblock %}

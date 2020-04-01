@@ -11,7 +11,8 @@
             <ul>
                 <li>{{ user_profile.FirstName }} {{ user_profile.LastName }}</li>
                 <img src="{{ MEDIA_URL }}{{ user_profile.picture }}">
-                <li>{{ user_profile.age }}</li>
+                <h5>Age: {{ user_profile.age }}</h5>
+                <h5>Flats the user has liked</h5>
                 {% if user_profile.liked_flats %}
                     <li>
                         {% for flat in user_profile.liked_flats.all %}
@@ -21,9 +22,10 @@
                 {% else %}
                     <strong>There are no flats present.</strong>
                 {% endif %}
+                <h5>Flats owned by the user</h5>
                 {% if owned_flats %}
                     <li>
-                        {% for flat in user_profile.liked_flats.all %}
+                        {% for flat in owned_flats %}
                             {{ flat.name }}
                         {% endfor %}
                     </li>

@@ -13,6 +13,7 @@ urlpatterns = [
     path('flats/<slug:flat_slug>/like', views.like_flat, name='like_flat'),
     path('users/<slug:user_slug>', views.view_profile, name='view_profile'),
     path('my_matches/', views.my_matches, name='my_matches'),
+    path('my_matches/<slug:user_slug>/like/', views.like_profile, name='my_matches'),
     path('add_flat/', views.add_flat, name='add_flat'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),

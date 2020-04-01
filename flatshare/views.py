@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from flatshare.models import Flat, UserProfile
+from flatshare.models import Flat, UserProfile, Match
 from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
@@ -89,20 +89,35 @@ def view_profile(request, user_slug):
     try:
         user_profile = UserProfile.objects.get(slug=user_slug)
         context_dict['user_profile'] = user_profile
-        context_dict['owned_flats'] = user_profile.user.flat_set
+        context_dict['owned_flats'] = user_profile.user.owned_flat_set.all()
     except UserProfile.DoesNotExist:
         context_dict['user_profile'] = None
     return render(request, 'flatshare/user.html', context=context_dict)
 
 
+def like_profile(request, user_slug):
+    liked_user = UserProfile.objects.get(slug=user_slug)
+    if liked_user not in request.user.userprofile.liked_users.all():
+        request.user.userprofile.liked_users.add(liked_user.user)
+        Match.objects.create(m_user=liked_user, m_flat=liked_user.liked_flats.get(owner=request.user), m_owner=request.user.userprofile)
+    return redirect(reverse('flatshare:my_matches'))
+
+
 @login_required
 def my_matches(request):
-    user_profile = UserProfile.objects.get(user=request.user)
+    context_dict = {}
     flat_matches = []
-    for flat in user_profile.liked_flats:
-        if user_profile.user in UserProfile.objects.get(user=flat.owner).liked_users:  # TODO: complete comparison
-            flat_matches.append(flat)
-    return render(request, 'flatshare/matches.html', {'flat_matches': flat_matches})
+    try:
+        for match in Match.objects.filter(m_user=request.user.userprofile).all():
+            flat_matches.append(match)
+        for match in Match.objects.filter(m_owner=request.user.userprofile).all():
+            flat_matches.append(match)
+        context_dict['matches'] = flat_matches
+        flat_likers = Flat.objects.get(owner=request.user).likers.all()
+        context_dict['likers'] = flat_likers
+    except Flat.DoesNotExist:
+        pass
+    return render(request, 'flatshare/matches.html', context=context_dict)
 
 
 def add_flat(request):
@@ -144,9 +159,9 @@ def show_flat(request, flat_slug):
 
 def like_flat(request, flat_slug):
     liked_flat = Flat.objects.get(slug=flat_slug)
-    request.user.userprofile.liked_flats.add(liked_flat)
+    if liked_flat not in request.user.userprofile.liked_flats.all() and liked_flat not in request.user.owned_flat_set.all():
+        request.user.userprofile.liked_flats.add(liked_flat)
     return redirect(reverse('flatshare:show_flat', args=[liked_flat.slug]))
-
 
 
 def list_flats(request):

@@ -31,7 +31,7 @@ class Flat(models.Model):
     flat_id = models.UUIDField(primary_key=True, editable=False, default=generated)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
     rent = models.IntegerField(default=1)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="owned_flat_set")
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
     save_location: str = '{0}_images/'.format(generated)
@@ -59,7 +59,7 @@ class UserProfile(models.Model):
     liked_users = models.ManyToManyField(User, related_name="liked_by_set", blank=True)
     slug = models.SlugField(blank=True)
 
-    # owned_flats: get via flats model
+    # owned_flat_set: get via flats model
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.user)
@@ -71,7 +71,11 @@ class UserProfile(models.Model):
 class Match(models.Model):
     match_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
     m_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    m_flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+    m_flat = models.ForeignKey(Flat, on_delete=models.CASCADE, related_name='+')
+    m_owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='+', null=True)
 
     class Meta:
         verbose_name_plural = 'Matches'
+
+    def __str__(self):
+        return str(self.m_user) + " " + str(self.m_flat)
