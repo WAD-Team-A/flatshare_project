@@ -67,3 +67,11 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.FirstName + " " + self.LastName
+
+class Match(models.Model):
+    match_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
+    m_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    m_flat = models.ForeignKey(Flat, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'Matches'

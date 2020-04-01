@@ -18,6 +18,9 @@
         <img src="{{ MEDIA_URL }}{{ flat.image1 }}">
         <img src="{{ MEDIA_URL }}{{ flat.image2 }}">
     </ul>
+    <form action='like' method='GET'>
+        <button type='submit'> Like Flat </button>
+    </form>
 {% else %}
     <strong>There are no flats present.</strong>
 {% endif %}

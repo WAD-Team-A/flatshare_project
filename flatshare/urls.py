@@ -10,6 +10,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('flats/', views.list_flats, name="list_flats"),
     path('flats/<slug:flat_slug>/', views.show_flat, name='show_flat'),
+    path('flats/<slug:flat_slug>/like', views.like_flat, name='like_flat'),
     path('users/<slug:user_slug>', views.view_profile, name='view_profile'),
     path('my_matches/', views.my_matches, name='my_matches'),
     path('add_flat/', views.add_flat, name='add_flat'),

@@ -100,7 +100,7 @@ def my_matches(request):
     user_profile = UserProfile.objects.get(user=request.user)
     flat_matches = []
     for flat in user_profile.liked_flats:
-        if flat.owner in user_profile.user.liked_by_set:  # TODO: complete comparison
+        if user_profile.user in UserProfile.objects.get(user=flat.owner).liked_users:  # TODO: complete comparison
             flat_matches.append(flat)
     return render(request, 'flatshare/matches.html', {'flat_matches': flat_matches})
 
@@ -140,6 +140,13 @@ def show_flat(request, flat_slug):
     except Flat.DoesNotExist:
         context_dict['flat'] = None
     return render(request, 'flatshare/flat.html', context=context_dict)
+
+
+def like_flat(request, flat_slug):
+    liked_flat = Flat.objects.get(slug=flat_slug)
+    request.user.userprofile.liked_flats.add(liked_flat)
+    return redirect(reverse('flatshare:show_flat', args=[liked_flat.slug]))
+
 
 
 def list_flats(request):
