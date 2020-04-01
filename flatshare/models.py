@@ -2,7 +2,7 @@ import uuid
 from django.utils.timezone import now
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
+
 
 
 
@@ -10,7 +10,6 @@ class Flat(models.Model):
     flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
     address = models.CharField(max_length=30, default = "1")
     postcode = models.CharField(max_length=10, default = "1")
-    slug = models.SlugField(unique=True)
     rent = models.IntegerField(default=1)
     description = models.TextField(max_length=500,default = "123")
     available_from = models.DateField(default=now)
@@ -18,15 +17,12 @@ class Flat(models.Model):
 
     #owner = models.OneToOneField("UserProfile", on_delete=models.CASCADE)
 
-    likes = models.ManyToManyField('Like',blank=True)
-    matches = models.ManyToManyField('Match',blank=True)
+    likes = models.ManyToManyField('Like')
+    matches = models.ManyToManyField('Match')
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.address + " " + self.postcode)
-        super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.slug
+        return self.address
 
 
 class UserProfile(models.Model):
@@ -44,13 +40,13 @@ class UserProfile(models.Model):
 
     u_flat = models.OneToOneField(Flat, on_delete=models.CASCADE,default=None, null = True)
 
-    likes = models.ManyToManyField('Like',blank=True)
-    matches = models.ManyToManyField('Match',blank=True)
+    likes = models.ManyToManyField('Like')
+    matches = models.ManyToManyField('Match')
 
         
 
     def __str__(self):
-        return self.user.username
+        return self.FirstName + " " + self.LastName
 
 
 

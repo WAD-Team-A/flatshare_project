@@ -18,17 +18,12 @@
                 <ul>
                     <li style = "padding-bottom:0"><h1 class = "logo">FLAT SHARE</h1></li>
                     <li class="active"><a href="{% url 'flatshare:index' %}">Home</a></li>
-                    {% if user.u_flat %}
-                        <li><a href="{% url 'flatshare:about' %}">Available Flatmates</a></li>
-                        <li><a href="{% url 'flatshare:view_flat' user.u_flat %}">Your Flat</a></li>
-                    {% else %}
-                        <li><a href="{% url 'flatshare:list_flats' %}">Available Flats</a></li>
-                        <li><a href="{% url 'flatshare:add_flat' %}">Add a New Flat</a></li>
-                    {% endif %}
+                    <li><a href="{% url 'flatshare:list_flats' %}">Available Flats</a></li>
+                    <li><a href="{% url 'flatshare:add_flat' %}">Add a New Flat</a></li>
                     <li><a href="{% url 'flatshare:about' %}">About Us</a></li>
                     <li><a href="{% url 'flatshare:contact' %}">Contact Us</a></li>
                     
-                    {% if user_authenticated %}
+                    {% if user.is_authenticated %}
                         <li style = "float:right"><a href="{% url 'flatshare:view_profile' user %}">My Profile</a></li>
                         <li style = "float:right"><a href="{% url 'flatshare:logout' %}">Log out</a></li>
                     {% else %}

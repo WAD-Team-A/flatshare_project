@@ -10,12 +10,7 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    context_dict = {}
-    if request.user.is_authenticated:
-        context_dict["user_authenticated"] = True
-        user = UserProfile.objects.get(user=request.user)
-        context_dict['user'] = user
-    return render(request, 'flatshare/index.html', context=context_dict)
+    return render(request, 'flatshare/index.html')
 
 
 def about(request):
@@ -92,10 +87,6 @@ def signup(request):
 
 def view_profile(request, username):
     context_dict = {}
-    if request.user.is_authenticated:
-        context_dict["user_authenticated"] = True
-        user = UserProfile.objects.get(user=request.user)
-        context_dict['user'] = user
     try:
         user = User.objects.get(username=username)
         user_profile = UserProfile.objects.get(user=user)
@@ -142,14 +133,10 @@ def add_flat(request):
         return HttpResponse("please log in first!")
 
 
-def view_flat(request, flat_id):
+def show_flat(request, flat_slug):
     context_dict = {}
-    if request.user.is_authenticated:
-        context_dict["user_authenticated"] = True
-        user = UserProfile.objects.get(user=request.user)
-        context_dict['user'] = user
     try:
-        flat = Flat.objects.get(slug=flat_id)
+        flat = Flat.objects.get(slug=flat_slug)
         context_dict['flat'] = flat
     except Flat.DoesNotExist:
         context_dict['flat'] = None
