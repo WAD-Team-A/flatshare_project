@@ -83,7 +83,7 @@ def signup(request):
     return render(request, 'flatshare/signup.html',
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-
+@login_required()
 def view_profile(request, user_slug):
     context_dict = {}
     try:
@@ -94,7 +94,7 @@ def view_profile(request, user_slug):
         context_dict['user_profile'] = None
     return render(request, 'flatshare/user.html', context=context_dict)
 
-
+@login_required()
 def like_profile(request, user_slug):
     liked_user = UserProfile.objects.get(slug=user_slug)
     if liked_user not in request.user.userprofile.liked_users.all():
@@ -119,7 +119,7 @@ def my_matches(request):
         pass
     return render(request, 'flatshare/matches.html', context=context_dict)
 
-
+@login_required()
 def add_flat(request):
     if request.user.is_authenticated:
         address_form = AddAddressForm()
@@ -156,7 +156,7 @@ def show_flat(request, flat_slug):
         context_dict['flat'] = None
     return render(request, 'flatshare/flat.html', context=context_dict)
 
-
+@login_required()
 def like_flat(request, flat_slug):
     liked_flat = Flat.objects.get(slug=flat_slug)
     if liked_flat not in request.user.userprofile.liked_flats.all() and liked_flat not in request.user.owned_flat_set.all():
