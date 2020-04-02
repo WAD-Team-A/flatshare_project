@@ -6,6 +6,7 @@ from flatshare.models import Flat, UserProfile, Match
 from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -87,7 +88,8 @@ def signup(request):
 def view_profile(request, user_slug):
     context_dict = {}
     try:
-        user_profile = UserProfile.objects.get(slug=user_slug)
+        user = User.objects.get(username=user_slug)
+        user_profile = UserProfile.objects.get(user=user)
         context_dict['user_profile'] = user_profile
         context_dict['owned_flats'] = user_profile.user.owned_flat_set.all()
     except UserProfile.DoesNotExist:
