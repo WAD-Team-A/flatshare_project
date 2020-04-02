@@ -1,0 +1,38 @@
+h1{
+    color: rgba(255, 255, 255, 0.8);
+    font-family:'Trade Winds';
+    text-align: center;
+    padding-left: 10px;
+}
+.user-form{
+    position: absolute;
+    top:15%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+
+}
+.user-form input{
+    border-radius: 5%;
+    border-style: none;
+    background-color:rgba(255, 255, 255, 0.8);
+    padding-left: 70px;
+    padding-right:70px;
+    text-align: center;
+    margin: 10px;
+    height: 20px;
+}
+.register{
+    font-family:'Trade Winds', cursive;
+}
+.login{
+    position: absolute;
+    bottom:5%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+
+}
+.login p{
+    color:rgba(255, 255, 255, 0.8);
+}

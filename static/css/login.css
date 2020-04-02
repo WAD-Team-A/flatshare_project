@@ -1,0 +1,59 @@
+.login-form{
+    position: absolute;
+    top:20%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+}
+.login-form h2{
+    color: rgba(255, 255, 255, 0.8);
+    font-family:'Trade Winds';
+    text-align: center;
+    padding-left: 10px;
+}
+.login-form input{
+    border-radius: 5%;
+    border-style: none;
+    background-color:rgba(255, 255, 255, 0.8);
+    font-family:'Satisfy', cursive;
+    padding: 10px;
+    padding-left: 70px;
+    padding-right:70px;
+    text-align: center;
+    margin: 10px;
+    height: 20px;
+}
+.login-form input:focus{
+    background-color:rgb(241, 190, 124);
+}
+.login-form button{
+    background-color:rgb(241, 190, 124);
+    border-radius: 10%;
+    border-style: none;
+    font-family:'Trade Winds', cursive;
+    position: absolute;
+    bottom: -30%;
+    left: 45%;
+    -webkit-transform: translateX(-45%);
+    transform: translateX(-45%);
+    padding:10px;
+    padding-left: 20px;
+    padding-right:20px;
+    margin:10px;
+}
+.login-form button:hover{
+    border-style: solid;
+    border-color:rgb(241, 190, 124);
+
+}
+.signup{
+    position: absolute;
+    bottom:30%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+
+}
+.signup p{
+    color:rgba(255, 255, 255, 0.8);
+}

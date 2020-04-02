@@ -1,0 +1,106 @@
+body{
+    margin:0;
+    padding:0 0 30px 0;
+    background-color: rgb(88,187,149);
+}
+.header{
+    margin: 0;
+    padding:0;
+}
+.auth{
+    position: absolute;
+    top:0;
+    left: 90%;
+    
+}
+
+.auth ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+.auth li{
+    
+    padding: 10px;
+    float: right;
+
+}
+.auth li a{
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+/* .logo{ 
+    background-color:rgb(2, 82, 74);
+    width: fit-content;
+} */
+.logo{
+    display: block;
+    padding:10px;
+    padding-top:0;
+    padding-bottom:0;
+    font-size: 100%;
+    margin: 0;
+    color: white;
+    font-family: 'Trade Winds', cursive;
+}
+.nav_bar{
+    padding: 0;
+    margin: 0;
+    width:100%;
+    display: inline-block;
+}
+
+.nav_bar ul{
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(2, 82, 74);
+    
+}
+
+.nav_bar li {
+    
+    padding: 10px;
+    float: left;
+
+}
+
+.nav_bar li a{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+    margin: 0;
+    position: relative;
+    color: white;
+    text-decoration: none;
+}
+.footer ul{
+    width:100%;
+    position: fixed;
+    bottom:0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(2, 82, 74);
+    
+}
+.footer li a{
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+    width: 25%;
+    padding:10px 0;
+    margin: 0;
+    position: relative;
+    color: white;
+    text-decoration: none;
+    text-align:center;
+}
+.header a:hover, .footer a:hover{
+    background-color: rgba(241, 190, 124, 0.7);
+
+}

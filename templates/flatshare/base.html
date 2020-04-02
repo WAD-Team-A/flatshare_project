@@ -3,21 +3,20 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Satisfy|Trade+Winds&display=swap" rel="stylesheet">
-        <title>
-            Flatshare -
-            {% block title_block %}
-                WAD2 project
-            {% endblock %}            
-        </title>
+        {% block head_block %}
+            <title>
+                Flatshare - Base          
+            </title>
+        {% endblock %}
     </head>
     <body>
         <div class="header">
             <div class="nav_bar">
                 <ul>
                     <li style = "padding-bottom:0"><h1 class = "logo">FLATSHARE</h1></li>
-                    <li class="active"><a href="{% url 'flatshare:index' %}">Home</a></li>
+                    <li><a href="{% url 'flatshare:index' %}">Home</a></li>
                     <li><a href="{% url 'flatshare:list_flats' %}">Available Flats</a></li>
                     <li><a href="{% url 'flatshare:add_flat' %}">Add a New Flat</a></li>
                     <li><a href="{% url 'flatshare:about' %}">About Us</a></li>

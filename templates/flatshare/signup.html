@@ -1,23 +1,29 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Sign up
+{% block head_block %}
+    <title>flatshare - Sign up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
 {% endblock %}
 {% block body_block %}
-
-<h1>Register for Flatshare</h1>
-{%if registered %}
-<strong>thank you for registering!</strong>
-<a hreh="{% url 'flatshare:index' %}">Return Home.</a><br />
-{% else %}
-<strong>register here!</strong><br />
-<form id="user_form" method="post" action="{% url 'flatshare:signup' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    <input type="submit" name="submit" value="Register" />
-</form>
-{% endif %}
+<div>
+    <h1>Register for Flatshare</h1>
+    {%if registered %}
+    <strong>thank you for registering!</strong>
+    <a hreh="{% url 'flatshare:index' %}">Return Home.</a><br />
+    {% else %}
+    <div class="user-form">
+        <form class="user-form" id="user_form" method="post" action="{% url 'flatshare:signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input class="register" type="submit" name="submit" value="Register" />
+        </form>
+    </div>
+    {% endif %}
+    <div class="login">
+        <p>Already have an account? <a href="{% url 'flatshare:login'%}">Log in</a></p>
+    </div>
+</div>
 {% endblock %}
 

@@ -1,20 +1,28 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %} 
 
-{% block title_block %}
-    Login
+{% block head_block %}
+    <title>flatshare - login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock %}
 
 {% block body_block %}
-<div class = "login-form">
-    <h2>Login to Flatshare</h2>
-    <form id ="login_form" method = "post" action = "{% url 'flatshare:login' %}">
-        {% csrf_token %}
-        <input type= "text" name="username" placeholder = "Enter Username" size = "50">
-        <br />
-        <input type= "text" name="password" placeholder = "Enter Password" size = "50">
-        <br />
-        <button type="submit">Login</button>
-    </form>
+<div>
+    <div class = "login-form">
+        <h2>Login to Flatshare</h2>
+        <form id ="login_form" method = "post" action = "{% url 'flatshare:login' %}">
+            {% csrf_token %}
+            <input type= "text" name="username" placeholder = "Enter Username" size = "50">
+            <br />
+            <input type= "text" name="password" placeholder = "Enter Password" size = "50">
+            <br />
+            <button  class="login-btn" type="submit">Login</button>
+            <br />
+        </form> 
+    </div>
+    <div class='signup'>
+        <p>Don't have an account? <a href="{% url 'flatshare:signup' %}">Sign up</a></p>
+    </div>
 </div>
+
 {% endblock %}
