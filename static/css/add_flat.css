@@ -1,9 +1,3 @@
-.head h1{
-    color: rgba(255,255,255,0.8);
-    font-family:'Trade Winds';
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
+body{
+    background-color: rgb(88,187,149);;
 }
