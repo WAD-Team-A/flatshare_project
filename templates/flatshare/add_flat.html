@@ -10,12 +10,11 @@
 
 {% block body_block %}
 <dvi class='head'>
-    <h1>Add a Flat</h1>
 </dvi>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            <h1 class="mt-2">Add a Flat</h1>
+            <h1 style="font-family: 'Trade Winds',cursive;">Add a Flat</h1>
             <hr class="mt-0 mb-4">
             <div>
                 <form id="add_flat_form" method="post" action="/flatshare/add_flat/">
@@ -30,11 +29,6 @@
                         {{ hidden }}
                     {% endfor %}
                     {% for field in address_form.visible_fields %}
-                        <div class= "col-6">
-                            {{ field|as_crispy_field }}
-                        </div>
-                    {% endfor %}
-                    {% for field in form.visible_fields %}
                         <div class= "col-6">
                             {{ field|as_crispy_field }}
                         </div>
