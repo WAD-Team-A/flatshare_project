@@ -54,6 +54,7 @@ class UserProfile(models.Model):
     LastName = models.CharField(max_length=NAME_MAX_CHAR, unique=False)
     picture = models.ImageField(upload_to='{0}/profile_images'.format(id(user)), blank=True)
     phone_no = models.IntegerField(unique=True, blank=True)
+    bio = models.CharField(max_length=500,unique=False,default="")
     age = models.IntegerField(default=18)
     liked_flats = models.ManyToManyField(Flat, related_name="likers", blank=True)
     liked_users = models.ManyToManyField(User, related_name="liked_by_set", blank=True)

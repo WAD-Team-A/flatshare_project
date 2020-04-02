@@ -1,16 +1,17 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    {{ user_profile.user }}'s Profile
+{% block head_block %}
+    <title>Flatshare - {{ user_profile.FirstName }}'s Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
 {% endblock %}
 
 {% block body_block %}
     <div>
         {% if user_profile %}
             <ul>
-                <li>{{ user_profile.FirstName }} {{ user_profile.LastName }}</li>
-                <img src="{{ MEDIA_URL }}{{ user_profile.picture }}">
+                <h1>{{ user_profile.FirstName }} {{ user_profile.LastName }}</h1>
+                <img class = "profile-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}">
                 <h5>Age: {{ user_profile.age }}</h5>
                 <h5>Flats the user has liked</h5>
                 {% if user_profile.liked_flats %}
