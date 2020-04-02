@@ -12,3 +12,18 @@ h1{
     width: 400px;
     border-radius: 50%;
 }
+
+.content1{
+    width: 46%;
+    margin: 2%;
+    float:left;
+}
+.content2{
+    width: 46%;
+    margin:2%;
+    float:right;
+}
+h3,p{
+    color: rgba(255, 255, 255, 0.8);
+    font-family:"arial"; 
+}

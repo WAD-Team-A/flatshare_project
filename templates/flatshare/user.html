@@ -9,29 +9,27 @@
 {% block body_block %}
     <div>
         {% if user_profile %}
-            <ul>
+            
                 <h1>{{ user_profile.FirstName }} {{ user_profile.LastName }}</h1>
                 <img class = "profile-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}">
-                <h5>Age: {{ user_profile.age }}</h5>
-                <h5>Flats the user has liked</h5>
-                {% if user_profile.liked_flats %}
-                    <li>
-                        {% for flat in user_profile.liked_flats.all %}
-                            {{ flat.name }}
-                        {% endfor %}
-                    </li>
-                {% else %}
-                    <strong>There are no flats present.</strong>
-                {% endif %}
-                <h5>Flats owned by the user</h5>
-                {% if owned_flats %}
-                    <li>
-                        {% for flat in owned_flats %}
-                            {{ flat.name }}
-                        {% endfor %}
-                    </li>
-                {% endif %}
-            </ul>
+                <div class = "content1">
+                    <h3>Age: {{ user_profile.age }}</h3>
+                    <h3>Bio: {{ user_profile.bio }}</h3>
+                </div>
+                <div class = "content2">
+                    <h3>Flats owned by the user</h3>
+                    {% if owned_flats %}
+                    <ul>
+                        <li>
+                            {% for flat in owned_flats %}
+                                {{ flat.name }}
+                            {% endfor %}
+                        </li>
+                    </ul>
+                    {% else %}
+                        <p>User doesn't own any flats</p>
+                    {% endif %}
+            
         {% else %}
             <strong>User profile empty</strong>
         {% endif %}
