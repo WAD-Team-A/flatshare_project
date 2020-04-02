@@ -74,6 +74,8 @@ def signup(request):
                 profile.picture = request.FILES['picture']
             profile.save()
             registered = True
+            user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'],)
+            login(request, user)
             return redirect(reverse('flatshare:index'))
         else:
             print(user_form.errors, profile_form.errors)

@@ -6,5 +6,6 @@ __pycache__/
 thumbs.db
 *.jpg
 .idea/
+media/*
 flatshare/migrations/
 *.swp
