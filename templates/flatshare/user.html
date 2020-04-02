@@ -9,16 +9,15 @@
 {% block body_block %}
     <div>
         {% if user_profile %}
-            
-                <h1>{{ user_profile.FirstName }} {{ user_profile.LastName }}</h1>
-                <img class = "profile-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}">
-                <div class = "content1">
-                    <h3>Age: {{ user_profile.age }}</h3>
-                    <h3>Bio: {{ user_profile.bio }}</h3>
-                </div>
-                <div class = "content2">
-                    <h3>Flats owned by the user</h3>
-                    {% if owned_flats %}
+            <h1>{{ user_profile.FirstName }} {{ user_profile.LastName }}</h1>
+            <img class="profile-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}">
+            <div class="content1">
+                <h3>Age: {{ user_profile.age }}</h3>
+                <h3>Bio: {{ user_profile.bio }}</h3>
+            </div>
+            <div class="content2">
+                <h3>Flats owned by the user</h3>
+                {% if owned_flats %}
                     <ul>
                         <li>
                             {% for flat in owned_flats %}
@@ -26,10 +25,11 @@
                             {% endfor %}
                         </li>
                     </ul>
-                    {% else %}
-                        <p>User doesn't own any flats</p>
-                    {% endif %}
-            
+                {% else %}
+                    <p>User doesn't own any flats</p>
+                {% endif %}
+            </div>
+            <a href="{% url 'flatshare:change_password' user_slug=user_profile.slug%}">Change password</a>
         {% else %}
             <strong>User profile empty</strong>
         {% endif %}

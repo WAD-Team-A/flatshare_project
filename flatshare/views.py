@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from flatshare.models import Flat, UserProfile, Match
-from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm
+from flatshare.forms import AddFlatForm, UserProfileForm, UserForm, AddAddressForm, ChangePasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
@@ -86,6 +86,19 @@ def signup(request):
         profile_form = UserProfileForm()
     return render(request, 'flatshare/signup.html',
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
+@login_required()
+def change_password(request, user_slug):
+    u = request.user
+    errors = None
+    password_form = ChangePasswordForm(request.POST)
+    if password_form.is_valid() and u.check_password(password_form.cleaned_data['password']):
+        u.set_password(password_form.cleaned_data['new_password'])
+        u.save()
+        redirect(reverse('flatshare:login'))
+    else:
+        errors = password_form.errors
+    return render(request, 'flatshare/change_password.html', context={'user': request.user, 'password_form' : password_form, 'errors': errors})
 
 
 @login_required()
