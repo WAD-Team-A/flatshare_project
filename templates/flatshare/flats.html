@@ -1,26 +1,26 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Available Flats
+{% block head_block %}
+    <title>Flatshare - Available Flats</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flats.css' %}">
 {% endblock %}
 
 {% block body_block %}
     <h1>Available Flats</h1>
-    <div>
+    <div class = "content">
     {% if flats %}
         <ul>
         {% for flat in flats %}
-            <li>{{ flat }}</li>
-            <a href="{{ flat.slug }}/">Details...</a><br />
+            <div class = "flat">
+                <li>{{ flat }}</li><br/>
+                <p><a href="{{ flat.slug }}/">Details...</a></p><br />
+            </div>
         {% endfor %}
         </ul>
     {% else %}
-        <strong>There are no flats present.</strong>
+        <h3>There are no flats present.</h3>
     {% endif %}
-    </div>
-
-    <div>
-        <a href="/">Back to Home</a><br />
+        <p><a href="/">Back to Home</a></p><br />
     </div>
 {% endblock %}
