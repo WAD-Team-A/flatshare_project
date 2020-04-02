@@ -10,7 +10,12 @@ h1{
     margin:2%;
     float:left;
 }
-
+.contact-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+  }
 h3, h5{
     font-family:arial;
     color: rgba(255, 255, 255, 0.8);
