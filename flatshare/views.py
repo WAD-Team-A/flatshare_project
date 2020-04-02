@@ -75,7 +75,8 @@ def signup(request):
                 profile.picture = request.FILES['picture']
             profile.save()
             registered = True
-            user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'],)
+            user = authenticate(username=user_form.cleaned_data['username'],
+                                password=user_form.cleaned_data['password'], )
             login(request, user)
             return redirect(reverse('flatshare:index'))
         else:
@@ -85,6 +86,7 @@ def signup(request):
         profile_form = UserProfileForm()
     return render(request, 'flatshare/signup.html',
                   context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
 
 @login_required()
 def view_profile(request, user_slug):
@@ -98,12 +100,14 @@ def view_profile(request, user_slug):
         context_dict['user_profile'] = None
     return render(request, 'flatshare/user.html', context=context_dict)
 
+
 @login_required()
 def like_profile(request, user_slug):
     liked_user = UserProfile.objects.get(slug=user_slug)
     if liked_user not in request.user.userprofile.liked_users.all():
         request.user.userprofile.liked_users.add(liked_user.user)
-        Match.objects.create(m_user=liked_user, m_flat=liked_user.liked_flats.get(owner=request.user), m_owner=request.user.userprofile)
+        Match.objects.create(m_user=liked_user, m_flat=liked_user.liked_flats.get(owner=request.user),
+                             m_owner=request.user.userprofile)
     return redirect(reverse('flatshare:my_matches'))
 
 
@@ -112,6 +116,7 @@ def my_matches(request):
     context_dict = {}
     flat_matches = []
     try:
+        context_dict["likes"] = request.user.userprofile.liked_flats.all()
         for match in Match.objects.filter(m_user=request.user.userprofile).all():
             flat_matches.append(match)
         for match in Match.objects.filter(m_owner=request.user.userprofile).all():
@@ -122,6 +127,7 @@ def my_matches(request):
     except Flat.DoesNotExist:
         pass
     return render(request, 'flatshare/matches.html', context=context_dict)
+
 
 @login_required()
 def add_flat(request):
@@ -160,12 +166,21 @@ def show_flat(request, flat_slug):
         context_dict['flat'] = None
     return render(request, 'flatshare/flat.html', context=context_dict)
 
+
 @login_required()
 def like_flat(request, flat_slug):
     liked_flat = Flat.objects.get(slug=flat_slug)
     if liked_flat not in request.user.userprofile.liked_flats.all() and liked_flat not in request.user.owned_flat_set.all():
         request.user.userprofile.liked_flats.add(liked_flat)
     return redirect(reverse('flatshare:show_flat', args=[liked_flat.slug]))
+
+
+@login_required()
+def unlike_flat(request, flat_slug):
+    unliked_flat = Flat.objects.get(slug=flat_slug)
+    if unliked_flat in request.user.userprofile.liked_flats.all() and unliked_flat not in request.user.owned_flat_set.all():
+        request.user.userprofile.liked_flats.remove(unliked_flat)
+    return redirect(reverse('flatshare:my_matches'))
 
 
 def list_flats(request):

@@ -28,5 +28,16 @@
         {% else %}
             <strong>No one has liked your flat yet.</strong>
         {% endif %}
+        <h3>Flats you've liked</h3>
+        {% if likes %}
+            {% for flat in likes%}
+                <a href="{% url 'flatshare:show_flat' flat_slug=flat.slug%}">{{ flat }}</a>
+                <form action='{{ flat.slug }}/unlike' method='GET'>
+                    <button type='submit'> Unlike Flat </button>
+                </form>
+            {% endfor %}
+        {% else %}
+            <strong>You haven't liked any flats yet.</strong>
+        {% endif %}
     </div>
 {% endblock %}
