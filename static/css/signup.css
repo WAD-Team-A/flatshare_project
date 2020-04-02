@@ -9,8 +9,7 @@ h1{
     top:15%;
     left: 50%;
     -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
-
+    transform: translateX(-50%);
 }
 .user-form input{
     border-radius: 5%;

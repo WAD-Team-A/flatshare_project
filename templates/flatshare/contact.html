@@ -2,10 +2,22 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Contact Us
+{% block head_block %}
+    <title>flatshare - Contact Us</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
 {% endblock %}
 
 {% block body_block %}
-    <h1>Contact Page Holder</h1>
+    <h1>How to Contact Us</h1>
+    <div class = "main-contact">
+        <h3>If you have any questions or would like to report any issues with the site please contact us on:</h3>
+        <h5>Email: info@flatshare.co.uk</h5>
+        <h5>Telephone: 0141 555 6677</h5>
+        <h5>Post: 1, Buchanan Street, Glasgow, G1 1AA</h5>
+    </div>
+    <div class = "secondary-contact">
+        <h3>Alternatively if you find an inappropriate, abusive or fake profile please use:</h3>
+        <h5>Email: report@flatshare.co.uk</h5>
+        <h5>Telephone: 0141 999 0999</h5>
+    </div>
 {% endblock %}
