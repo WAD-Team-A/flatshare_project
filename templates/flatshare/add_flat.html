@@ -22,22 +22,22 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     {% for hidden in address_form.hidden_fields %}
-                        {{ hidden }}
+                        <div class= "col-6">
+                            {{ hidden|as_crispy_field }}
+                        </div>
                     {% endfor %}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
                     {% for field in address_form.visible_fields %}
-                        {{ field.name }}
-                        {{ field.errors }}
-                        {{ field.help_text }}
-                        {{ field }}
+                        <div class= "col-6">
+                            {{ field|as_crispy_field }}
+                        </div>
                     {% endfor %}
                     {% for field in form.visible_fields %}
-                        {{ field.name }}
-                        {{ field.errors }}
-                        {{ field.help_text }}
-                        {{ field }}
+                        <div class= "col-6">
+                            {{ field|as_crispy_field }}
+                        </div>
                     {% endfor %}
                     <input type="submit" name="submit" value="Add Flat" />
                 </form>
