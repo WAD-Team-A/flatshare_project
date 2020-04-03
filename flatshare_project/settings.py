@@ -24,7 +24,7 @@ SECRET_KEY = '9jr51(4n7s9xz8*@s*@z*r+qsdwm-6$e(#g!mqfnjbo5a$i2+('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meta4icalbot.eu.pythonanywhere.com']
 
 # Application definition
 
@@ -100,8 +100,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = [
-    # 'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    # 'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]
