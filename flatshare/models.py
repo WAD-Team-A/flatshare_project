@@ -7,8 +7,7 @@ from django.contrib.auth.models import User
 
 
 class Address(models.Model):
-    generated_uuid = uuid.uuid4()
-    address_id = models.UUIDField(primary_key=True, editable=False, default=generated_uuid)
+    address_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     flat_no = models.CharField(max_length=5)
     house_no = models.IntegerField(default=1)
     street = models.CharField(max_length=99)
@@ -27,20 +26,19 @@ class Address(models.Model):
 class Flat(models.Model):
     NAME_MAX_CHAR = 128
     name = models.CharField(max_length=NAME_MAX_CHAR)
-    generated = uuid.uuid4()
-    flat_id = models.UUIDField(primary_key=True, editable=False, default=generated)
+    flat_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
     rent = models.IntegerField(default=1)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="owned_flat_set")
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
-    save_location: str = '{0}_images/'.format(generated)
+    save_location: str = '{0}_images/'.format(flat_id)
     image1 = models.ImageField(upload_to=save_location, blank=True, null=True)
     image2 = models.ImageField(upload_to=save_location, blank=True, null=True)
     slug = models.SlugField(blank=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.generated)
+        self.slug = slugify(self.flat_id)
         super(Flat, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -70,7 +68,7 @@ class UserProfile(models.Model):
         return self.FirstName + " " + self.LastName
 
 class Match(models.Model):
-    match_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4())
+    match_id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     m_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     m_flat = models.ForeignKey(Flat, on_delete=models.CASCADE, related_name='+')
     m_owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='+', null=True)
