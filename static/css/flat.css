@@ -1,0 +1,35 @@
+h3{
+    color: rgba(255, 255, 255, 0.8);
+    font-family:'Trade Winds';
+    text-align: left;
+    padding-left: 10px;
+}
+
+li{
+    font-family:arial;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.info{
+    width:100%;
+}
+.img1-div{
+    width:46%;
+    margin:0 2%;
+    float:left;
+}
+
+.img2-div{
+    width:46%;
+    margin:0 2%;
+    float:right;
+}
+
+img{
+    max-height: 300px;
+    width: auto;
+}
+button{
+    margin: 2%;
+}
+

@@ -1,23 +1,30 @@
 {% extends 'flatshare/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Home
+{% block head_block %}
+    <title>Flatshre - {{flat.owner}}'s Flat</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flat.css' %}">
 {% endblock %}
 
 {% block body_block %}
 <div>
 {% if flat %}
-    <ul>
-        <li>{{ flat.name }}</li>
-        <li>{{ flat.address }}</li>
-        <li>{{ flat.rent }}</li>
-        <li>{{ flat.owner }}</li>
-        <li>{{ flat.description }}</li>
-        <li>{{ flat.available_from }}</li>
+    <h3>{{ flat.name }}</h3>
+    <div class = "info">
+        <ul>
+            <li>Address: {{ flat.address }}</li>
+            <li>PPM: {{ flat.rent }}</li>
+            <li>Owner: {{ flat.owner }}</li>
+            <li>Available From: {{ flat.available_from }}</li>
+            <li>{{ flat.description }}</li>
+        </ul>
+    </div>
+    <div class = "img1-div">
         <img src="{{ MEDIA_URL }}{{ flat.image1 }}">
+    </div>
+    <div class = "img2-div">
         <img src="{{ MEDIA_URL }}{{ flat.image2 }}">
-    </ul>
+    </div>
     <form action='like' method='GET'>
         <button type='submit'> Like Flat </button>
     </form>
