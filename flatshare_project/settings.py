@@ -24,7 +24,7 @@ SECRET_KEY = '9jr51(4n7s9xz8*@s*@z*r+qsdwm-6$e(#g!mqfnjbo5a$i2+('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['meta4icalbot.eu.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1','meta4icalbot.eu.pythonanywhere.com']
 
 # Application definition
 
