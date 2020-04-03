@@ -32,7 +32,7 @@ class Flat(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None, related_name="owned_flat_set")
     description = models.TextField(max_length=500)
     available_from = models.DateField(default=now)
-    save_location: str = '{0}_images/'.format(str(flat_id))
+    save_location: str = '{0}_images/'.format(flat_id.value_to_string())
     image1 = models.ImageField(upload_to=save_location, blank=True, null=True)
     image2 = models.ImageField(upload_to=save_location, blank=True, null=True)
     slug = models.SlugField(blank=True)
